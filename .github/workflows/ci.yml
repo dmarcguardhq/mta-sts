@@ -30,11 +30,14 @@ jobs:
         uses: actions/checkout@v6
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Archive the site
+        run: tar cvf artifact.tar -C site/ .
       - name: Upload artifact
         uses: actions/upload-artifact@v7
         with:
           name: github-pages
-          path: site
+          path: artifact.tar
+          retention-days: 1
           include-hidden-files: true
       - name: Deploy to GitHub Pages
         id: deployment
